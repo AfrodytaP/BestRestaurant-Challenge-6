@@ -18,3 +18,15 @@ export const addBooking = async (userId, date, time, numberOfPeople) => {
     );
   }
 };
+
+export const getBookingsByUserId = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/getAllById/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while fetching the bookings"
+    );
+  }
+};
