@@ -35,3 +35,11 @@ export const getAllBookingsService = async (date) => {
     throw new Error(`Unable to fetch bookings: ${error.message}`);
   }
 };
+
+export const cancelBookingService = async (bookingId) => {
+  try {
+    await Booking.findByIdAndDelete(bookingId);
+  } catch (error) {
+    throw new Error(`Unable to cancel booking: ${error.message}`);
+  }
+};
