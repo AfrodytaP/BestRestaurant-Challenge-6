@@ -45,3 +45,15 @@ export const getAllBookings = async (filterDate) => {
     );
   }
 };
+
+export const cancelBooking = async (bookingId) => {
+  try {
+    const response = await axios.delete(`${API_URL}/delete/${bookingId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while cancelling the booking"
+    );
+  }
+};

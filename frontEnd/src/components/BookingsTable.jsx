@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   getBookingsByUserId,
   getAllBookings,
+  cancelBooking,
 } from "../services/booking.service";
 import authService from "../services/auth.service";
 
@@ -30,6 +31,15 @@ const BookingsTable = () => {
 
     fetchBookings();
   }, [filterDate]);
+
+  const handleCancel = async (bookingId) => {
+    try {
+      await cancelBooking(bookingId);
+      setBookings(bookings.filter((booking) => booking._id !== bookingId));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const handleFilter = async () => {
     try {
@@ -75,6 +85,14 @@ const BookingsTable = () => {
               <td>{new Date(booking.date).toLocaleDateString()}</td>
               <td>{booking.time}</td>
               <td>{booking.numberOfPeople}</td>
+              {userRole === "manager" && (
+                <td>
+                  <button onClick={() => handleCancel(booking._id)}>
+                    Cancel
+                  </button>
+                  <button>Edit</button>
+                </td>
+              )}
             </tr>
           ))}
         </tbody>
