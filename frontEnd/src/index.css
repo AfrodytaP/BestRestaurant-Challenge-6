@@ -1,0 +1,46 @@
+/* footer styling*/
+.footer {
+  text-align: center;
+  background-color: hsl(224, 37%, 8%);
+  color: hsl(4, 22%, 87%);
+}
+
+.background-image {
+  background: url("src/assets/wallpaper2.png");
+
+  background-size: cover;
+  min-height: calc(100vh - 205px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header,
+.nav-link {
+  background-color: hsl(224, 37%, 8%);
+  padding: 10px;
+  /* text-align: center; */
+  color: hsl(33, 62%, 55%);
+  font-size: 135%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.nav-link:hover {
+  color: hsl(46, 62%, 55%);
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="hsl(33, 62%, 55%)" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+}
+
+.navbar-toggler {
+  border-color: hsl(33, 62%, 55%);
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  outline: none;
+  box-shadow: 0 0 0 0.1rem rgba(255, 215, 0, 0.5);
+}
