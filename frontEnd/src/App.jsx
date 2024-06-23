@@ -43,6 +43,10 @@ const App = () => {
               element={<BookingsTable currentUser={currentUser} />}
             />
             <Route
+              path="/allBookings"
+              element={<BookingsTable currentUser={currentUser} />}
+            />
+            <Route
               path="/login"
               element={<Login setCurrentUser={setCurrentUser} />}
             />

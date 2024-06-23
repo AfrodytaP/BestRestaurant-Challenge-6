@@ -32,7 +32,7 @@ const Header = ({ currentUser, logOut }) => {
                 {currentUser.role === "manager" ? (
                   <>
                     <li className="nav-item">
-                      <Link to="/allBooking" className="nav-link">
+                      <Link to="/allBookings" className="nav-link">
                         All Booking
                       </Link>
                     </li>
