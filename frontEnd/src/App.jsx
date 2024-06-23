@@ -8,6 +8,8 @@ import Home from "../src/components/Home";
 import Login from "../src/components/Login";
 import Register from "../src/components/Register";
 import Footer from "../src/components/Footer";
+import BookingPage from "./components/BookingPage";
+import BookingForm from "./components/BookingForm";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -35,6 +37,7 @@ const App = () => {
           <Routes>
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/makeBookings" element={<BookingPage />} />
             <Route
               path="/login"
               element={<Login setCurrentUser={setCurrentUser} />}

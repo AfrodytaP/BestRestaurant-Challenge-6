@@ -29,6 +29,28 @@ const Header = ({ currentUser, logOut }) => {
             </li>
             {currentUser ? (
               <div className="navbar-nav ml-auto">
+                {currentUser.role === "manager" ? (
+                  <>
+                    <li className="nav-item">
+                      <Link to="/allBooking" className="nav-link">
+                        All Booking
+                      </Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li className="nav-item">
+                      <Link to="/makeBookings" className="nav-link">
+                        Make a booking
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link to="/myBookings" className="nav-link">
+                        My Bookings
+                      </Link>
+                    </li>
+                  </>
+                )}
                 <li className="nav-item">
                   <a href="/login" className="nav-link" onClick={logOut}>
                     Log Out
