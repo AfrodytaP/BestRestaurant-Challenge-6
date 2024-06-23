@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { addBooking } from "../controllers/booking.controller.js";
+import {
+  addBooking,
+  getBookingsByUserId,
+} from "../controllers/booking.controller.js";
 
 export default class BookingRoutes {
   #router;
@@ -11,6 +14,7 @@ export default class BookingRoutes {
 
   #initializeRoutes = () => {
     this.#router.post("/add", addBooking);
+    this.#router.get("/getAllById/:userId", getBookingsByUserId);
   };
 
   getRouter = () => {

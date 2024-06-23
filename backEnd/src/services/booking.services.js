@@ -16,3 +16,12 @@ export const addBookingService = async (userId, date, time, numberOfPeople) => {
     throw new Error(`Unable to add booking: ${error.message}`);
   }
 };
+
+export const getBookingsByUserIdService = async (userId) => {
+  try {
+    const bookings = await Booking.find({ userId });
+    return bookings;
+  } catch (error) {
+    throw new Error(`Unable to fetch bookings: ${error.message}`);
+  }
+};
