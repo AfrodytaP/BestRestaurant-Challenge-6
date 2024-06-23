@@ -25,3 +25,13 @@ export const getBookingsByUserIdService = async (userId) => {
     throw new Error(`Unable to fetch bookings: ${error.message}`);
   }
 };
+
+export const getAllBookingsService = async (date) => {
+  try {
+    const filter = date ? { date: new Date(date) } : {};
+    const bookings = await Booking.find(filter);
+    return bookings;
+  } catch (error) {
+    throw new Error(`Unable to fetch bookings: ${error.message}`);
+  }
+};

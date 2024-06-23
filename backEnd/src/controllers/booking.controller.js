@@ -1,6 +1,7 @@
 import {
   addBookingService,
   getBookingsByUserIdService,
+  getAllBookingsService,
 } from "../services/booking.services.js";
 
 export const addBooking = async (req, res) => {
@@ -26,6 +27,16 @@ export const getBookingsByUserId = async (req, res) => {
   try {
     const { userId } = req.params;
     const bookings = await getBookingsByUserIdService(userId);
+    res.status(200).json(bookings);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+export const getAllBookings = async (req, res) => {
+  try {
+    const { date } = req.query;
+    const bookings = await getAllBookingsService(date);
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ message: error.message });
