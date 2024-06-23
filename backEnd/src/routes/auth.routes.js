@@ -1,6 +1,5 @@
 import { Router } from "express";
 import { body } from "express-validator";
-
 import middlewareConfig from "../middlewares/middleware.js";
 import {
   userLoginController,
@@ -17,7 +16,7 @@ export default class AuthRoutes {
   }
 
   #initializeRoutes = () => {
-    const { verifySignUp, verifyToken } = middlewareConfig;
+    const { verifySignUp, verifyToken, isManager } = middlewareConfig;
 
     this.#router.use((req, res, next) => {
       res.header(

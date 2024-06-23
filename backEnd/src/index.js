@@ -3,6 +3,7 @@ import Config from "./config/Config.js";
 import Database from "./db/Database.js";
 import Server from "./server/Server.js";
 import AuthRoutes from "./routes/auth.routes.js";
+import BookingRoutes from "./routes/booking.routes.js";
 
 dotenv.config();
 
@@ -17,8 +18,12 @@ if (!PORT || !HOST) {
 
 const database = new Database();
 const authRoutes = new AuthRoutes();
+const bookingRoutes = new BookingRoutes();
 
-const routers = [{ path: "/auth", router: authRoutes.getRouter() }];
+const routers = [
+  { path: "/auth", router: authRoutes.getRouter() },
+  { path: "/booking", router: bookingRoutes.getRouter() },
+];
 
 const server = new Server(PORT, HOST, routers);
 
