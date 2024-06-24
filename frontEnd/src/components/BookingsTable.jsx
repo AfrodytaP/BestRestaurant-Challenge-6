@@ -5,6 +5,7 @@ import {
   cancelBooking,
 } from "../services/booking.service";
 import authService from "../services/auth.service";
+import { useNavigate } from "react-router-dom";
 
 const BookingsTable = () => {
   const [bookings, setBookings] = useState([]);
@@ -12,6 +13,7 @@ const BookingsTable = () => {
   const [filterDate, setFilterDate] = useState("");
   const [userRole, setUserRole] = useState(null);
   const currentUser = authService.getCurrentUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -55,6 +57,10 @@ const BookingsTable = () => {
     }
   };
 
+  const handleEdit = (bookingId) => {
+    navigate(`/makeBookings/${bookingId}`);
+  };
+
   return (
     <div>
       <h1>Bookings </h1>
@@ -90,7 +96,7 @@ const BookingsTable = () => {
                   <button onClick={() => handleCancel(booking._id)}>
                     Cancel
                   </button>
-                  <button>Edit</button>
+                  <button onClick={() => handleEdit(booking._id)}>Edit</button>
                 </td>
               )}
             </tr>

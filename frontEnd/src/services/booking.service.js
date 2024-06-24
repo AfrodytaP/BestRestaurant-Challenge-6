@@ -57,3 +57,31 @@ export const cancelBooking = async (bookingId) => {
     );
   }
 };
+
+export const getBookingById = async (bookingId) => {
+  try {
+    const response = await axios.get(`${API_URL}/${bookingId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while fetching the booking"
+    );
+  }
+};
+
+export const updateBooking = async (bookingId, date, time, numberOfPeople) => {
+  try {
+    const response = await axios.put(`${API_URL}/edit/${bookingId}`, {
+      date,
+      time,
+      numberOfPeople,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while updating the booking"
+    );
+  }
+};

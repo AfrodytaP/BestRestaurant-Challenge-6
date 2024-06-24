@@ -38,6 +38,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/makeBookings" element={<BookingPage />} />
+            <Route path="/makeBookings/:bookingId" element={<BookingPage />} />
             <Route
               path="/myBookings"
               element={<BookingsTable currentUser={currentUser} />}
