@@ -4,6 +4,8 @@ import {
   getBookingsByUserId,
   getAllBookings,
   cancelBooking,
+  getBooking,
+  updateBooking,
 } from "../controllers/booking.controller.js";
 
 export default class BookingRoutes {
@@ -19,6 +21,8 @@ export default class BookingRoutes {
     this.#router.get("/getAllById/:userId", getBookingsByUserId);
     this.#router.get("/getAll", getAllBookings);
     this.#router.delete("/delete/:bookingId", cancelBooking);
+    this.#router.get("/:bookingId", getBooking);
+    this.#router.put("/edit/:bookingId", updateBooking);
   };
 
   getRouter = () => {

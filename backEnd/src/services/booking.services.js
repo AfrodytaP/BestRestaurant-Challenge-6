@@ -43,3 +43,31 @@ export const cancelBookingService = async (bookingId) => {
     throw new Error(`Unable to cancel booking: ${error.message}`);
   }
 };
+
+export const getBookingByBookingId = async (bookingId) => {
+  try {
+    const booking = await Booking.findById(bookingId);
+    return booking;
+  } catch (error) {
+    throw new Error(`Failed to fetch booking: ${error.message}`);
+  }
+};
+
+export const updateBookingById = async (
+  bookingId,
+  date,
+  time,
+  numberOfPeople
+) => {
+  try {
+    const updatedBooking = await Booking.findByIdAndUpdate(
+      bookingId,
+      { date, time, numberOfPeople },
+      { new: true }
+    );
+
+    return updatedBooking;
+  } catch (error) {
+    throw new Error(`Failed to update booking: ${error.message}`);
+  }
+};
