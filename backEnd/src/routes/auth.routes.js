@@ -45,7 +45,7 @@ export default class AuthRoutes {
     );
 
     this.#router.post(
-      "/user/change-password",
+      "/user/changePassword",
       [
         verifyToken,
         body("oldPassword").exists().escape(),
