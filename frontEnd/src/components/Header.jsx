@@ -52,11 +52,7 @@ const Header = ({ currentUser, logOut }) => {
                   </>
                 )}
                 <li className="nav-item">
-                  <a
-                    href="/changePassword"
-                    className="nav-link"
-                    onClick={logOut}
-                  >
+                  <a href="/changePassword" className="nav-link">
                     Change Password
                   </a>
                 </li>

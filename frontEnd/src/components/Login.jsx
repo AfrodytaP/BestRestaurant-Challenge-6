@@ -45,7 +45,13 @@ const Login = ({ setCurrentUser }) => {
     }
 
     const login = await AuthService.login(username, password);
+
     if (login.accessToken) {
+      const accessToken = login.accessToken;
+      localStorage.setItem("accessToken", accessToken);
+      const token = localStorage.getItem("accessToken");
+      console.log("login.accessToken", token);
+
       setCurrentUser(AuthService.getCurrentUser());
       navigate("/");
     } else {

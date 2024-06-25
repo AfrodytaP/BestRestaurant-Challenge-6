@@ -54,12 +54,38 @@ const getUserById = async (userId) => {
   }
 };
 
+export const changePassword = async (oldPassword, newPassword) => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    throw new Error("No token available. User is not authenticated.");
+  }
+
+  try {
+    const response = await axios.post(
+      `${API_URL}/user/changePassword`,
+      { oldPassword, newPassword },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while changing the password"
+    );
+  }
+};
+
 const authService = {
   register,
   login,
   logout,
   getCurrentUser,
   getUserById,
+  changePassword,
 };
 
 export default authService;

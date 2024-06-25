@@ -10,6 +10,7 @@ import Register from "../src/components/Register";
 import Footer from "../src/components/Footer";
 import BookingPage from "./components/BookingPage";
 import BookingsTable from "./components/BookingsTable";
+import ChangePassword from "./components/ChangePassword";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -47,6 +48,7 @@ const App = () => {
               path="/allBookings"
               element={<BookingsTable currentUser={currentUser} />}
             />
+            <Route path="/changePassword" element={<ChangePassword />} />
             <Route
               path="/login"
               element={<Login setCurrentUser={setCurrentUser} />}

@@ -78,17 +78,20 @@ const BookingsTable = () => {
       <h1 className="mt-4 mb-4 text-light ">Bookings </h1>
       {error && <div className="alert alert-danger">{error}</div>}
       {userRole === "manager" && (
-        <div>
+        <div className="row mb-4">
           <label className="me-2 text-light mb-4">Filter by Date:</label>
-          <input
-            className="form-control me-2 mb-4"
-            type="date"
-            value={filterDate}
-            onChange={(e) => setFilterDate(e.target.value)}
-          />
-          <button className="btn btn-primary" onClick={handleFilter}>
-            Filter
-          </button>
+          <div className="col-sm-2">
+            <input
+              className="form-control me-2 mb-4"
+              type="date"
+              value={filterDate}
+              onChange={(e) => setFilterDate(e.target.value)}
+            />
+
+            <button className="btn btn-primary" onClick={handleFilter}>
+              Filter
+            </button>
+          </div>
         </div>
       )}
       <table className="table table-striped table-bordered">
