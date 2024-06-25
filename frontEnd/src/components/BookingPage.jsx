@@ -10,7 +10,6 @@ const BookingPage = () => {
 
   return (
     <div>
-      <h1>Booking Page</h1>
       <BookingForm currentUser={currentUser} bookingIdToUpdate={bookingId} />
     </div>
   );

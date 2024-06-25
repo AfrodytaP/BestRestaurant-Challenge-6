@@ -42,11 +42,24 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem(`user`));
 };
 
+const getUserById = async (userId) => {
+  try {
+    const response = await axios.get(`${API_URL}/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message ||
+        "An error occurred while fetching the user details"
+    );
+  }
+};
+
 const authService = {
   register,
   login,
   logout,
   getCurrentUser,
+  getUserById,
 };
 
 export default authService;

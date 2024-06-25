@@ -21,7 +21,13 @@ const BookingsTable = () => {
         setUserRole(currentUser.role);
         if (currentUser.role === "manager") {
           const data = await getAllBookings(filterDate);
-          setBookings(data);
+          const bookingsWithUserEmails = await Promise.all(
+            data.map(async (booking) => {
+              const user = await authService.getUserById(booking.userId);
+              return { ...booking, email: user.email };
+            })
+          );
+          setBookings(bookingsWithUserEmails);
         } else {
           const data = await getBookingsByUserId(currentUser.id);
           setBookings(data);
@@ -47,7 +53,13 @@ const BookingsTable = () => {
     try {
       if (userRole === "manager") {
         const data = await getAllBookings(filterDate);
-        setBookings(data);
+        const bookingsWithUserEmails = await Promise.all(
+          data.map(async (booking) => {
+            const user = await getUserById(booking.userId);
+            return { ...booking, email: user.email };
+          })
+        );
+        setBookings(bookingsWithUserEmails);
       } else {
         const data = await getBookingsByUserId(currentUser.id);
         setBookings(data);
@@ -63,25 +75,29 @@ const BookingsTable = () => {
 
   return (
     <div>
-      <h1>Bookings </h1>
-      {error && <div className="error">{error}</div>}
+      <h1 className="mt-4 mb-4 text-light ">Bookings </h1>
+      {error && <div className="alert alert-danger">{error}</div>}
       {userRole === "manager" && (
         <div>
-          <label>Filter by Date:</label>
+          <label className="me-2 text-light mb-4">Filter by Date:</label>
           <input
+            className="form-control me-2 mb-4"
             type="date"
             value={filterDate}
             onChange={(e) => setFilterDate(e.target.value)}
           />
-          <button onClick={handleFilter}>Filter</button>
+          <button className="btn btn-primary" onClick={handleFilter}>
+            Filter
+          </button>
         </div>
       )}
-      <table>
-        <thead>
+      <table className="table table-striped table-bordered">
+        <thead className="thead-dark">
           <tr>
             <th>Date</th>
             <th>Time</th>
             <th>Number of People</th>
+            {userRole === "manager" && <th>Email</th>}
             {userRole === "manager" && <th>Actions</th>}
           </tr>
         </thead>
@@ -91,12 +107,21 @@ const BookingsTable = () => {
               <td>{new Date(booking.date).toLocaleDateString()}</td>
               <td>{booking.time}</td>
               <td>{booking.numberOfPeople}</td>
+              {userRole === "manager" && <td>{booking.email}</td>}
               {userRole === "manager" && (
                 <td>
-                  <button onClick={() => handleCancel(booking._id)}>
+                  <button
+                    className="btn btn-danger me-2"
+                    onClick={() => handleCancel(booking._id)}
+                  >
                     Cancel
                   </button>
-                  <button onClick={() => handleEdit(booking._id)}>Edit</button>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleEdit(booking._id)}
+                  >
+                    Edit
+                  </button>
                 </td>
               )}
             </tr>

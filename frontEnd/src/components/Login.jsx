@@ -63,62 +63,70 @@ const Login = ({ setCurrentUser }) => {
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-md-6">
-          <div className="card card-container">
-            <img
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              alt="profile-img"
-              className="profile-img-card"
-            />
-
-            <form onSubmit={handleLogin} ref={form}>
-              <div className="form-group">
-                <label htmlFor="username">Username</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="username"
-                  value={username}
-                  onChange={onChangeUsername}
+          <div className="card bg-dark text-white card-container">
+            <div className="card-body">
+              <div className="text-center mb-3">
+                <img
+                  src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                  alt="profile-img"
+                  className="profile-img-card"
+                  style={{ width: "100px", borderRadius: "50%" }}
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="password">Password</label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="password"
-                  value={password}
-                  onChange={onChangePassword}
-                />
-              </div>
-              <div className="form-group">
-                <button
-                  className="btn btn-primary btn-block"
-                  disabled={loading}
-                  type="submit"
-                >
-                  {loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  <span>Login</span>
-                </button>
-              </div>
-
-              {message && (
-                <div className="form-group">
-                  <div
-                    className={
-                      isSuccessMessage
-                        ? "alert alert-success"
-                        : "alert alert-danger"
-                    }
-                    role="alert"
-                  >
-                    {message}
-                  </div>
+              <form onSubmit={handleLogin} ref={form}>
+                <div className="form-group mb-3">
+                  <label htmlFor="username">Username</label>
+                  <input
+                    type="text"
+                    className="form-control bg-dark text-white"
+                    name="username"
+                    value={username}
+                    onChange={onChangeUsername}
+                  />
                 </div>
-              )}
-            </form>
+                <div className="form-group mb-3">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control bg-dark text-white"
+                    name="password"
+                    value={password}
+                    onChange={onChangePassword}
+                  />
+                </div>
+                <div className="form-group mb-3 text-center">
+                  <button
+                    className="btn btn-primary btn-block"
+                    disabled={loading}
+                    type="submit"
+                    style={{
+                      backgroundColor: "#0d111c",
+                      borderColor: "#0d111c",
+                    }}
+                  >
+                    {loading && (
+                      <span className="spinner-border spinner-border-sm"></span>
+                    )}
+                    <span>Login</span>
+                  </button>
+                </div>
+
+                {message && (
+                  <div className="form-group mb-3">
+                    <div
+                      className={
+                        isSuccessMessage
+                          ? "alert alert-success"
+                          : "alert alert-danger"
+                      }
+                      role="alert"
+                    >
+                      {message}
+                    </div>
+                  </div>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>

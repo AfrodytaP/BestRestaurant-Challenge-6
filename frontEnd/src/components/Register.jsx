@@ -69,68 +69,81 @@ const Register = () => {
   };
 
   return (
-    <div className="container py-5 h-100">
+    <div className="container py-3 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
         <div className="col-md-6">
-          <div className="card card-container">
-            <img
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              alt="profile-img"
-              className="profile-img-card"
-            />
-            <form onSubmit={handleRegister} ref={formRef}>
-              {!successful && (
-                <div>
+          <div className="card bg-dark text-white card-container">
+            <div className="card-body">
+              <div className="text-center mb-3">
+                <img
+                  src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                  alt="profile-img"
+                  className="profile-img-card"
+                  style={{ width: "100px", borderRadius: "50%" }}
+                />
+              </div>
+              <form onSubmit={handleRegister} ref={formRef}>
+                {!successful && (
+                  <div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="username">Username</label>
+                      <input
+                        className="form-control bg-dark text-white"
+                        type="text"
+                        id="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        className="form-control bg-dark text-white"
+                        type="email"
+                        id="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="password">Password</label>
+                      <input
+                        className="form-control bg-dark text-white"
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                    <div className="form-group mb-3 text-center">
+                      <button
+                        className="btn btn-primary btn-block"
+                        style={{
+                          backgroundColor: "#0d111c",
+                          borderColor: "#0d111c",
+                        }}
+                      >
+                        Sign Up
+                      </button>
+                    </div>
+                  </div>
+                )}
+                {message && (
                   <div className="form-group">
-                    <label htmlFor="username">Username</label>
-                    <input
-                      className="form-control"
-                      type="text"
-                      id="username"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
+                    <div
+                      className={
+                        successful
+                          ? "alert alert-success"
+                          : "alert alert-danger"
+                      }
+                      role="alert"
+                    >
+                      {message}
+                    </div>
                   </div>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      className="form-control"
-                      type="email"
-                      id="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input
-                      className="form-control"
-                      type="password"
-                      id="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
-                  <div className="form-group">
-                    <button className="btn btn-primary btn-block">
-                      Sign Up
-                    </button>
-                  </div>
-                </div>
-              )}
-              {message && (
-                <div className="form-group">
-                  <div
-                    className={
-                      successful ? "alert alert-success" : "alert alert-danger"
-                    }
-                    role="alert"
-                  >
-                    {message}
-                  </div>
-                </div>
-              )}
-            </form>
+                )}
+              </form>
+            </div>
           </div>
         </div>
       </div>

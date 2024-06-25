@@ -93,48 +93,61 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
   };
 
   return (
-    <div>
-      <h2>Booking Form</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4 text-light ">Make a Booking</h2>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Date:</label>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
+        <div className="row mb-4">
+          <label className="col-sm-2 col-form-label text-light">Date:</label>
+          <div className="col-sm-2">
+            <input
+              className="form-control"
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label>Time:</label>
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            required
-          />
+        <div className="row mb-4">
+          <label className="col-sm-2 col-form-label text-light">Time:</label>
+          <div className="col-sm-2">
+            <input
+              className="form-control"
+              type="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            />
+          </div>
         </div>
-        <div>
-          <label>Number of People:</label>
-          <select
-            value={numberOfPeople}
-            onChange={(e) => setNumberOfPeople(e.target.value)}
-            required
-          >
-            <option value="">Select number of people</option>
-            {[...Array(10).keys()].map((i) => (
-              <option key={i + 1} value={i + 1}>
-                {i + 1}
-              </option>
-            ))}
-          </select>
+        <div className="row mb-4">
+          <label className="col-sm-2 col-form-label text-light">
+            Number of People:
+          </label>
+          <div className="col-sm-2">
+            <select
+              className="form-select"
+              value={numberOfPeople}
+              onChange={(e) => setNumberOfPeople(e.target.value)}
+              required
+            >
+              <option value="">Select number of people</option>
+              {[...Array(10).keys()].map((i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <button type="submit">
+        <button className="btn btn-primary" type="submit">
           {isUpdateMode ? "Update Booking" : "Book Now"}
         </button>
       </form>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {successMessage && <div style={{ color: "green" }}>{successMessage}</div>}
+      {error && <div className="alert alert-danger mt-3">{error}</div>}
+      {successMessage && (
+        <div className="alert alert-success mt-3">{successMessage}</div>
+      )}
     </div>
   );
 };
