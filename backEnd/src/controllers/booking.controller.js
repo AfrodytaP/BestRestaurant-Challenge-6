@@ -73,6 +73,7 @@ export const getBooking = async (req, res) => {
         date: booking.date,
         time: booking.time,
         numberOfPeople: booking.numberOfPeople,
+        userId: booking.userId,
       },
     });
   } catch (error) {

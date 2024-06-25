@@ -10,8 +10,12 @@ export const getAllUsersService = async () => {
 
 export const getUserByIDService = async (_id) => {
   try {
-    return await User.findById(_id);
+    const user = await User.findById(_id, "email");
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
   } catch (e) {
-    throw e;
+    throw new Error(`Unable to fetch user: ${e.message}`);
   }
 };

@@ -15,9 +15,13 @@ export const userGetDbController = async (req, res) => {
 };
 
 export const userGetByIDController = async (req, res) => {
-  console.log(req.body);
-  const user = await getUserByIDService(req.body._id);
-  res.json(user);
+  try {
+    const { userId } = req.params;
+    const user = await getUserByIDService(userId);
+    res.json(user);
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
 };
 
 export const userLoginController = async (req, res) => {

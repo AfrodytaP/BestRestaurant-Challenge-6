@@ -5,6 +5,7 @@ import {
   userLoginController,
   userRegisterController,
   userChangePasswordController,
+  userGetByIDController,
 } from "../controllers/auth.controller.js";
 
 export default class AuthRoutes {
@@ -52,6 +53,8 @@ export default class AuthRoutes {
       ],
       userChangePasswordController
     );
+
+    this.#router.get("/user/:userId", userGetByIDController);
   };
 
   getRouter = () => {
