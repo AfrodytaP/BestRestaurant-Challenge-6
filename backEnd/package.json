@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "prod": "cross-env NODE_ENV=prod nodemon src/index.js",
-    "start": "cross-env NODE_ENV=production nodemon src/index.js",
+    "start": "node src/index.js",
     "start-win": "cross-env NODE_ENV=production nodemon src/index.js",
     "test": "cross-env NODE_ENV=test mocha --timeout 10000 --exit --recursive",
     "test-win": "cross-env NODE_ENV=test mocha --timeout 10000 --exit --recursive",
