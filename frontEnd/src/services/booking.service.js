@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://api.render.com/deploy/srv-cq2lf2t6l47c73b8s9ng?key=LGGTkxe1VBA";
+const API_URL = "https://bestrestaurant-challenge-6-be.onrender.com";
 // const API_URL = process.env.REACT_APP_BOOKING_API_URL;
 
 export const addBooking = async (userId, date, time, numberOfPeople) => {
