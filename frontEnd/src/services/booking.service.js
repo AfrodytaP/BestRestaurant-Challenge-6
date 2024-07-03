@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = "https://bestrestaurant-challenge-6-be.onrender.com";
+const API_URL = "https://bestrestaurant-challenge-6-be.onrender.com/booking";
 // const API_URL = process.env.REACT_APP_BOOKING_API_URL;
 
 export const addBooking = async (userId, date, time, numberOfPeople) => {
   try {
-    const response = await axios.post(`${API_URL}/booking/add`, {
+    const response = await axios.post(`${API_URL}/add`, {
       userId,
       date,
       time,
@@ -22,7 +22,7 @@ export const addBooking = async (userId, date, time, numberOfPeople) => {
 
 export const getBookingsByUserId = async (userId) => {
   try {
-    const response = await axios.get(`${API_URL}/booking/getAllById/${userId}`);
+    const response = await axios.get(`${API_URL}/getAllById/${userId}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -35,8 +35,8 @@ export const getBookingsByUserId = async (userId) => {
 export const getAllBookings = async (filterDate) => {
   try {
     const url = filterDate
-      ? `${API_URL}/bookingget/All?date=${filterDate}`
-      : `${API_URL}/booking/getAll`;
+      ? `${API_URL}get/All?date=${filterDate}`
+      : `${API_URL}/getAll`;
     const response = await axios.get(url);
     return response.data;
   } catch (error) {
@@ -49,7 +49,7 @@ export const getAllBookings = async (filterDate) => {
 
 export const cancelBooking = async (bookingId) => {
   try {
-    const response = await axios.delete(`${API_URL}/booking/delete/${bookingId}`);
+    const response = await axios.delete(`${API_URL}/delete/${bookingId}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -61,7 +61,7 @@ export const cancelBooking = async (bookingId) => {
 
 export const getBookingById = async (bookingId) => {
   try {
-    const response = await axios.get(`${API_URL}/booking/${bookingId}`);
+    const response = await axios.get(`${API_URL}/${bookingId}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -73,7 +73,7 @@ export const getBookingById = async (bookingId) => {
 
 export const updateBooking = async (bookingId, date, time, numberOfPeople) => {
   try {
-    const response = await axios.put(`${API_URL}/booking/edit/${bookingId}`, {
+    const response = await axios.put(`${API_URL}/edit/${bookingId}`, {
       date,
       time,
       numberOfPeople,
@@ -89,7 +89,7 @@ export const updateBooking = async (bookingId, date, time, numberOfPeople) => {
 
 export const getUserById = async (userId) => {
   try {
-    const response = await axios.get(`${API_URL}/booking/user/${userId}`);
+    const response = await axios.get(`${API_URL}/user/${userId}`);
     return response.data;
   } catch (error) {
     throw new Error(
