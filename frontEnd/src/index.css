@@ -6,7 +6,7 @@
 }
 
 .background-image {
-  background: url("src/assets/wallpaper2.png");
+  background: url("../public/wallpaper3.png");
 
   background-size: cover;
   min-height: calc(100vh - 205px);
