@@ -7,13 +7,12 @@
   "scripts": {
     "prod": "cross-env NODE_ENV=prod nodemon src/index.js",
     "start": "cross-env NODE_ENV=production src/index.js",
-    "start-win": "cross-env NODE_ENV=production nodemon src/index.js",
+    "start-win": "cross-env NODE_ENV=production src/index.js",
     "test": "cross-env NODE_ENV=test mocha --timeout 10000 --exit --recursive",
     "test-win": "cross-env NODE_ENV=test mocha --timeout 10000 --exit --recursive",
     "start:dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "coverage": "cross-env NODE_ENV=test c8 -r html npm test",
-    "coverage-win": "cross-env NODE_ENV=test c8 -r html npm test",
-     "serve": "serve -s build"
+    "coverage-win": "cross-env NODE_ENV=test c8 -r html npm test"
   },
   "author": "",
   "license": "ISC",
