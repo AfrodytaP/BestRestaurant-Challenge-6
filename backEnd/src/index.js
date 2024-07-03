@@ -3,7 +3,7 @@ import Config from "./config/Config.js";
 import Database from "./db/Database.js";
 import Server from "./server/Server.js";
 import UserRoutes from "./routes/User.routes.js";
-import BookingRoutes from "./routes/Booking.routes.js";
+import BookingRoutes from "./routes/booking.routes.js";
 
 const envFile = {
   development: ".env.dev",
