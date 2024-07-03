@@ -8,7 +8,7 @@ import Database from "../../src/db/Database.js";
 import User from "../../src/models/user.model.js";
 import UserController from "../../src/controllers/User.controller.js";
 import UserRoutes from "../../src/routes/User.routes.js";
-import UserService from "../../src/services/User.services.js";
+import UserService from "../../src/services/user.services.js";
 
 const testUsers = [
   {

@@ -6,7 +6,7 @@ import Database from "../../src/db/Database.js";
 import Server from "../../src/server/Server.js";
 import BookingController from "../../src/controllers/Booking.controller.js";
 import BookingRoutes from "../../src/routes/Booking.routes.js";
-import BookingService from "../../src/services/Booking.services.js";
+import BookingService from "../../src/services/booking.services.js";
 
 describe("Booking API Integration Tests", () => {
   let bookingServer;
