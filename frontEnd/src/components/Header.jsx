@@ -7,7 +7,7 @@ const Header = ({ currentUser, logOut }) => {
     <nav className="header navbar navbar-expand-lg">
       <div className="container-fluid">
         <Link to="/home" className="navbar-brand">
-          <img src={logo} alt="DFCorp logo" width="100" />
+          <img src={logo} alt="BestRestaurant logo" width="100" />
         </Link>
         <button
           className="navbar-toggler"

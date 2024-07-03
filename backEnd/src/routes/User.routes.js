@@ -1,23 +1,26 @@
 import { Router } from "express";
 import { body } from "express-validator";
 import middlewareConfig from "../middlewares/middleware.js";
-import {
-  userLoginController,
-  userRegisterController,
-  userChangePasswordController,
-  userGetByIDController,
-} from "../controllers/auth.controller.js";
+import UserController from "../controllers/User.controller.js";
 
-export default class AuthRoutes {
+export default class UserRoutes {
+  #controller;
   #router;
+  #routeStartPoint;
 
-  constructor() {
+  constructor(controller = new UserController(), routeStartPoint = "/") {
+    this.#controller = controller;
+    this.#routeStartPoint = routeStartPoint;
     this.#router = Router();
     this.#initializeRoutes();
   }
 
   #initializeRoutes = () => {
     const { verifySignUp, verifyToken, isManager } = middlewareConfig;
+
+    console.log("verifySignUp:", verifySignUp);
+    console.log("verifyToken:", verifyToken);
+    console.log("isManager:", isManager);
 
     this.#router.use((req, res, next) => {
       res.header(
@@ -26,7 +29,10 @@ export default class AuthRoutes {
       );
       next();
     });
-
+    console.log(
+      "verifySignUp.checkDuplicateUsernameOrEmail:",
+      verifySignUp.checkDuplicateUsernameOrEmail
+    );
     this.#router.post(
       "/user/register",
       [
@@ -35,13 +41,13 @@ export default class AuthRoutes {
         body("password").exists().escape(),
         verifySignUp.checkDuplicateUsernameOrEmail,
       ],
-      userRegisterController
+      this.#controller.userRegisterController
     );
 
     this.#router.post(
       "/user/login",
       [body("username").exists().escape(), body("password").exists().escape()],
-      userLoginController
+      this.#controller.userLoginController
     );
 
     this.#router.post(
@@ -51,13 +57,18 @@ export default class AuthRoutes {
         body("oldPassword").exists().escape(),
         body("newPassword").exists().escape(),
       ],
-      userChangePasswordController
+      this.#controller.userChangePasswordController
     );
 
-    this.#router.get("/user/:userId", userGetByIDController);
+    this.#router.get("/user/:userId", this.#controller.userGetByIDController);
   };
 
   getRouter = () => {
     return this.#router;
   };
+
+  getRouteStartPoint = () => {
+    return this.#routeStartPoint;
+  };
 }
+

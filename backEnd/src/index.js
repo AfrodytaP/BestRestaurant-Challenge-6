@@ -2,10 +2,16 @@ import dotenv from "dotenv";
 import Config from "./config/Config.js";
 import Database from "./db/Database.js";
 import Server from "./server/Server.js";
-import AuthRoutes from "./routes/auth.routes.js";
-import BookingRoutes from "./routes/booking.routes.js";
+import UserRoutes from "./routes/User.routes.js";
+import BookingRoutes from "./routes/Booking.routes.js";
 
-dotenv.config();
+const envFile = {
+  development: ".env.dev",
+  test: ".env.test",
+  production: ".env",
+}[process.env.NODE_ENV || "development"];
+
+dotenv.config({ path: envFile });
 
 Config.load();
 
@@ -17,7 +23,7 @@ if (!PORT || !HOST) {
 }
 
 const database = new Database();
-const authRoutes = new AuthRoutes();
+const authRoutes = new UserRoutes();
 const bookingRoutes = new BookingRoutes();
 
 const routers = [

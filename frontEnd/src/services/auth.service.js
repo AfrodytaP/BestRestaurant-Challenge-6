@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const API_URL = `http://localhost:8000/auth`;
+// const API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 const register = async (username, email, password) => {
   try {
@@ -12,7 +13,12 @@ const register = async (username, email, password) => {
 
     return response.data;
   } catch (error) {
-    return { error: error.response.data.message };
+    if (!error.response) {
+      return { error: "An error occurred while registering" };
+    }
+    return {
+      error: error.response.data.message,
+    };
   }
 };
 
@@ -30,6 +36,9 @@ const login = async (username, password) => {
 
     return response.data;
   } catch (error) {
+    if (!error.response) {
+      return { error: "An error occurred while logging in" };
+    }
     return { error: error.response.data.message };
   }
 };
@@ -39,7 +48,16 @@ const logout = () => {
 };
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem(`user`));
+  try {
+    const userData = localStorage.getItem(`user`);
+    if (!userData) {
+      return null;
+    }
+    return JSON.parse(userData);
+  } catch (error) {
+    console.error("Error parsing user data from localStorage:", error);
+    return null;
+  }
 };
 
 const getUserById = async (userId) => {

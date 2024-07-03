@@ -9,6 +9,7 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -82,6 +83,7 @@ const Register = () => {
                   style={{ width: "100px", borderRadius: "50%" }}
                 />
               </div>
+              <h2 className="text-center mb-4">Sign Up</h2>
               <form onSubmit={handleRegister} ref={formRef}>
                 {!successful && (
                   <div>
@@ -115,8 +117,19 @@ const Register = () => {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <div className="form-group mb-3">
+                      <label htmlFor="confirmPassword">Confirm Password</label>
+                      <input
+                        className="form-control bg-dark text-white"
+                        id="confirmPassword"
+                        type="password"
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </div>
                     <div className="form-group mb-3 text-center">
                       <button
+                        type="submit"
                         className="btn btn-primary btn-block"
                         style={{
                           backgroundColor: "#0d111c",

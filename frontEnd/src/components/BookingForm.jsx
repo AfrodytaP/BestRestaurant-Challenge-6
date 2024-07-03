@@ -23,7 +23,7 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
   const formatDate = (isoString) => {
     const date = new Date(isoString);
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const month = String(date.getMonth() + 1).padStart(2, "0"); 
     const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   };
@@ -44,8 +44,50 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
     }
   };
 
+  const generateTimeSlots = (startTime, endTime, interval) => {
+    const timeSlots = [];
+    let currentTime = startTime;
+
+    while (currentTime <= endTime) {
+      const hours = Math.floor(currentTime / 60);
+      const minutes = currentTime % 60;
+      const timeString = `${hours.toString().padStart(2, "0")}:${minutes
+        .toString()
+        .padStart(2, "0")}`;
+      timeSlots.push(timeString);
+      currentTime += interval;
+    }
+
+    return timeSlots;
+  };
+
+  const allowedTimeSlots = generateTimeSlots(720, 1290, 15);
+
+  const isDateInPast = (date) => {
+    const selectedDate = new Date(date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return selectedDate < today;
+  };
+
+  const isTimeInPast = (date, time) => {
+    const selectedDateTime = new Date(`${date}T${time}`);
+    const now = new Date();
+    return selectedDateTime < now;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (isDateInPast(date)) {
+      setError("You cannot select a date in the past.");
+      return;
+    }
+
+    if (isTimeInPast(date, time)) {
+      setError("You cannot select a time that has already passed.");
+      return;
+    }
 
     try {
       setError(null);
@@ -97,10 +139,13 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
       <h2 className="mb-4 text-light ">Make a Booking</h2>
       <form onSubmit={handleSubmit}>
         <div className="row mb-4">
-          <label className="col-sm-2 col-form-label text-light">Date:</label>
+          <label htmlFor="date" className="col-sm-2 col-form-label text-light">
+            Date:
+          </label>
           <div className="col-sm-2">
             <input
               className="form-control"
+              id="date"
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
@@ -109,24 +154,46 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
           </div>
         </div>
         <div className="row mb-4">
-          <label className="col-sm-2 col-form-label text-light">Time:</label>
+          <label htmlFor="time" className="col-sm-2 col-form-label text-light">
+            Time:
+          </label>
           <div className="col-sm-2">
-            <input
+            <select
+              className="form-control"
+              id="time"
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              required
+            >
+              <option value="" disabled>
+                Select a time
+              </option>
+              {allowedTimeSlots.map((slot) => (
+                <option key={slot} value={slot}>
+                  {slot}
+                </option>
+              ))}
+            </select>
+            {/* <input
               className="form-control"
               type="time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
               required
-            />
+            /> */}
           </div>
         </div>
         <div className="row mb-4">
-          <label className="col-sm-2 col-form-label text-light">
+          <label
+            htmlFor="numberOfPeople"
+            className="col-sm-2 col-form-label text-light"
+          >
             Number of People:
           </label>
           <div className="col-sm-2">
             <select
               className="form-select"
+              id="numberOfPeople"
               value={numberOfPeople}
               onChange={(e) => setNumberOfPeople(e.target.value)}
               required

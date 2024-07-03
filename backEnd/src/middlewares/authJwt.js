@@ -2,7 +2,6 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.model.js";
 
 export const verifyToken = (req, res, next) => {
-  // let token = req.headers["x-access-token"];
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 

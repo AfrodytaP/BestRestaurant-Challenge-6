@@ -1,31 +1,35 @@
 import { Router } from "express";
-import {
-  addBooking,
-  getBookingsByUserId,
-  getAllBookings,
-  cancelBooking,
-  getBooking,
-  updateBooking,
-} from "../controllers/booking.controller.js";
+import BookingController from "../controllers/Booking.controller.js";
 
 export default class BookingRoutes {
+  #controller;
   #router;
+  #routeStartPoint;
 
-  constructor() {
+  constructor(controller = new BookingController(), routeStartPoint = "/") {
+    this.#controller = controller;
+    this.#routeStartPoint = routeStartPoint;
     this.#router = Router();
-    this.#initializeRoutes();
+    this.#initialiseRoutes();
   }
 
-  #initializeRoutes = () => {
-    this.#router.post("/add", addBooking);
-    this.#router.get("/getAllById/:userId", getBookingsByUserId);
-    this.#router.get("/getAll", getAllBookings);
-    this.#router.delete("/delete/:bookingId", cancelBooking);
-    this.#router.get("/:bookingId", getBooking);
-    this.#router.put("/edit/:bookingId", updateBooking);
+  #initialiseRoutes = () => {
+    this.#router.post("/add", this.#controller.addBooking);
+    this.#router.get(
+      "/getAllById/:userId",
+      this.#controller.getBookingsByUserId
+    );
+    this.#router.get("/getAll", this.#controller.getAllBookings);
+    this.#router.delete("/delete/:bookingId", this.#controller.cancelBooking);
+    this.#router.get("/:bookingId", this.#controller.getBooking);
+    this.#router.put("/edit/:bookingId", this.#controller.updateBooking);
   };
 
   getRouter = () => {
     return this.#router;
+  };
+
+  getRouteStartPoint = () => {
+    return this.#routeStartPoint;
   };
 }

@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 
-const checkDuplicateUsernameOrEmail = async (req, res, next) => {
+export const checkDuplicateUsernameOrEmail = async (req, res, next) => {
   try {
     const userByUsername = await User.findOne({ username: req.body.username });
     if (userByUsername) {
@@ -21,9 +21,3 @@ const checkDuplicateUsernameOrEmail = async (req, res, next) => {
     res.status(500).send({ message: err.message });
   }
 };
-
-const verifySignUp = {
-  checkDuplicateUsernameOrEmail,
-};
-
-export default verifySignUp;

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-
 import AuthService from "../src/services/auth.service";
-
 import Header from "../src/components/Header";
 import Home from "../src/components/Home";
 import Login from "../src/components/Login";

@@ -83,6 +83,7 @@ const Login = ({ setCurrentUser }) => {
                 <div className="form-group mb-3">
                   <label htmlFor="username">Username</label>
                   <input
+                    id="username"
                     type="text"
                     className="form-control bg-dark text-white"
                     name="username"
@@ -93,6 +94,7 @@ const Login = ({ setCurrentUser }) => {
                 <div className="form-group mb-3">
                   <label htmlFor="password">Password</label>
                   <input
+                    id="password"
                     type="password"
                     className="form-control bg-dark text-white"
                     name="password"

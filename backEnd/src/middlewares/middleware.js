@@ -1,6 +1,12 @@
 import { verifyToken, isManager } from "./authJwt.js";
-import verifySignUp from "./verifySignUp.js";
+import { checkDuplicateUsernameOrEmail } from "./verifySignUp.js";
 
-const middlewareConfig = { verifyToken, isManager, verifySignUp };
+const middlewareConfig = {
+  verifyToken,
+  isManager,
+  verifySignUp: {
+    checkDuplicateUsernameOrEmail,
+  },
+};
 
 export default middlewareConfig;
