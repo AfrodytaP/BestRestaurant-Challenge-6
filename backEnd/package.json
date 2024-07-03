@@ -12,7 +12,8 @@
     "test-win": "cross-env NODE_ENV=test mocha --timeout 10000 --exit --recursive",
     "start:dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "coverage": "cross-env NODE_ENV=test c8 -r html npm test",
-    "coverage-win": "cross-env NODE_ENV=test c8 -r html npm test"
+    "coverage-win": "cross-env NODE_ENV=test c8 -r html npm test",
+     "serve": "serve -s build"
   },
   "author": "",
   "license": "ISC",

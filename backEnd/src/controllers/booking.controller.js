@@ -1,4 +1,4 @@
-import BookingService from "../services/Booking.services.js";
+import BookingService from "../services/booking.services.js";
 export default class BookingController {
   #service;
 

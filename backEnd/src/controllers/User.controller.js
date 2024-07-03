@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
-import UserService from "../services/User.services.js";
+import UserService from "../services/user.services.js";
 import mongoose from "mongoose";
 import User from "../models/user.model.js";
 mongoose.Promise = global.Promise;

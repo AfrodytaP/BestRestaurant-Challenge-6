@@ -1,5 +1,5 @@
 import { Router } from "express";
-import BookingController from "../controllers/Booking.controller.js";
+import BookingController from "../controllers/booking.controller.js";
 
 export default class BookingRoutes {
   #controller;
