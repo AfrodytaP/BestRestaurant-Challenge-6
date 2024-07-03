@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_URL = `https://bestrestaurant-challenge-6-be.onrender.com`;
+const API_URL = `https://bestrestaurant-challenge-6-be.onrender.com/auth`;
 // const API_URL = process.env.REACT_APP_AUTH_API_URL;
 
 const register = async (username, email, password) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/user/register`, {
+    const response = await axios.post(`${API_URL}/user/register`, {
       username,
       password,
       email,
@@ -24,7 +24,7 @@ const register = async (username, email, password) => {
 
 const login = async (username, password) => {
   try {
-    const response = await axios.post(`${API_URL}/auth/user/login`, {
+    const response = await axios.post(`${API_URL}/user/login`, {
       username,
       password,
     });
@@ -62,7 +62,7 @@ const getCurrentUser = () => {
 
 const getUserById = async (userId) => {
   try {
-    const response = await axios.get(`${API_URL}/auth/user/${userId}`);
+    const response = await axios.get(`${API_URL}/user/${userId}`);
     return response.data;
   } catch (error) {
     throw new Error(
@@ -80,7 +80,7 @@ export const changePassword = async (oldPassword, newPassword) => {
 
   try {
     const response = await axios.post(
-      `${API_URL}/auth/user/changePassword`,
+      `${API_URL}/user/changePassword`,
       { oldPassword, newPassword },
       {
         headers: {
