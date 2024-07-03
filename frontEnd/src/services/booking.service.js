@@ -35,7 +35,7 @@ export const getBookingsByUserId = async (userId) => {
 export const getAllBookings = async (filterDate) => {
   try {
     const url = filterDate
-      ? `${API_URL}get/All?date=${filterDate}`
+      ? `${API_URL}/getAll?date=${filterDate}`
       : `${API_URL}/getAll`;
     const response = await axios.get(url);
     return response.data;
