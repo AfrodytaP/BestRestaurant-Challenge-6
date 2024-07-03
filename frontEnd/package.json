@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "test": "vitest --mode testing",
     "coverage": "vitest run --coverage",
-    "serve": "serve -s build",
+    "serve": "serve -s build"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
