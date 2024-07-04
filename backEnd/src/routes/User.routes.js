@@ -16,11 +16,7 @@ export default class UserRoutes {
   }
 
   #initializeRoutes = () => {
-    const { verifySignUp, verifyToken, isManager } = middlewareConfig;
-
-    console.log("verifySignUp:", verifySignUp);
-    console.log("verifyToken:", verifyToken);
-    console.log("isManager:", isManager);
+    const { verifySignUp, verifyToken } = middlewareConfig;
 
     this.#router.use((req, res, next) => {
       res.header(
@@ -29,10 +25,7 @@ export default class UserRoutes {
       );
       next();
     });
-    console.log(
-      "verifySignUp.checkDuplicateUsernameOrEmail:",
-      verifySignUp.checkDuplicateUsernameOrEmail
-    );
+
     this.#router.post(
       "/user/register",
       [
@@ -71,4 +64,3 @@ export default class UserRoutes {
     return this.#routeStartPoint;
   };
 }
-

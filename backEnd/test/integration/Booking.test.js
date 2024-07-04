@@ -4,8 +4,8 @@ import supertest from "supertest";
 import Config from "../../src/config/Config.js";
 import Database from "../../src/db/Database.js";
 import Server from "../../src/server/Server.js";
-import BookingController from "../../src/controllers/Booking.controller.js";
-import BookingRoutes from "../../src/routes/Booking.routes.js";
+import BookingController from "../../src/controllers/booking.controller.js";
+import BookingRoutes from "../../src/routes/booking.routes.js";
 import BookingService from "../../src/services/booking.services.js";
 
 describe("Booking API Integration Tests", () => {

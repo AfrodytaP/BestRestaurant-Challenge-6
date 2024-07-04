@@ -1,7 +1,7 @@
 import axios from "axios";
 import AuthService from "../../src/services/auth.service";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://bestrestaurant-challenge-6-be.onrender.com/auth";
 
 vi.mock("axios");
 

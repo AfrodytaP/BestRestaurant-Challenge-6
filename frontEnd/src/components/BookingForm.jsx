@@ -138,7 +138,7 @@ const BookingForm = ({ currentUser, bookingIdToUpdate }) => {
     <div className="booking-container">
       <div className="booking-form-container">
         <h2 className="mb-4 text-light text-center">Make a Booking</h2>
-        <div className="bookingForm">
+        <div className="bookingForm" data-testid="mockBookingForm">
           <form onSubmit={handleSubmit}>
             <div className="row mb-4">
               <label

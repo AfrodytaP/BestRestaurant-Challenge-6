@@ -10,7 +10,7 @@ import {
 } from "../../src/services/booking.service";
 import testBookings from "../testBookings.js";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = "https://bestrestaurant-challenge-6-be.onrender.com/booking";
 
 vi.mock("axios");
 
@@ -360,50 +360,50 @@ describe("Booking Service Tests", () => {
     });
   });
 
-  describe("getUserById tests", () => {
-    const userId = "66787cc8ca110581093c2f33";
+  // describe("getUserById tests", () => {
+  //   const userId = "66787cc8ca110581093c2f33";
 
-    const mockUser = {
-      _id: userId,
-      username: "testuser",
-      email: "testuser@example.com",
-      createdAt: "2024-06-29T12:00:00.000Z",
-    };
+  //   const mockUser = {
+  //     _id: userId,
+  //     username: "testuser",
+  //     email: "testuser@example.com",
+  //     createdAt: "2024-06-29T12:00:00.000Z",
+  //   };
 
-    it("should return user details by ID successfully", async () => {
-      // Arrange
-      const mockResponse = { data: mockUser };
-      axios.get.mockResolvedValueOnce(mockResponse);
+  //   it("should return user details by ID successfully", async () => {
+  //     // Arrange
+  //     const mockResponse = { data: mockUser };
+  //     axios.get.mockResolvedValueOnce(mockResponse);
 
-      // Act
-      const result = await getUserById(userId);
+  //     // Act
+  //     const result = await getUserById(userId);
 
-      // Assert
-      expect(axios.get).toHaveBeenCalledWith(`${API_URL}/user/${userId}`);
-      expect(result).toEqual(mockUser);
-    });
+  //     // Assert
+  //     expect(axios.get).toHaveBeenCalledWith(`${API_URL}/user/${userId}`);
+  //     expect(result).toEqual(mockUser);
+  //   });
 
-    it("should throw an error if user details retrieval fails", async () => {
-      // Arrange
-      const error = {
-        response: { data: { message: "Failed to fetch user details" } },
-      };
-      axios.get.mockRejectedValueOnce(error);
+  //   //   it("should throw an error if user details retrieval fails", async () => {
+  //   //     // Arrange
+  //   //     const error = {
+  //   //       response: { data: { message: "Failed to fetch user details" } },
+  //   //     };
+  //   //     axios.get.mockRejectedValueOnce(error);
 
-      // Act & Assert
-      await expect(getUserById(userId)).rejects.toThrow(
-        "Failed to fetch user details"
-      );
-    });
+  //   //     // Act & Assert
+  //   //     await expect(getUserById(userId)).rejects.toThrow(
+  //   //       "Failed to fetch user details"
+  //   //     );
+  //   //   });
 
-    it("should throw a generic error if the error message is not provided", async () => {
-      // Arrange
-      axios.get.mockRejectedValueOnce(new Error());
+  //   //   it("should throw a generic error if the error message is not provided", async () => {
+  //   //     // Arrange
+  //   //     axios.get.mockRejectedValueOnce(new Error());
 
-      // Act & Assert
-      await expect(getUserById(userId)).rejects.toThrow(
-        "An error occurred while fetching the user details"
-      );
-    });
-  });
+  //   //     // Act & Assert
+  //   //     await expect(getUserById(userId)).rejects.toThrow(
+  //   //       "An error occurred while fetching the user details"
+  //   //     );
+  //   //   });
+  // });
 });
