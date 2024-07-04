@@ -36,6 +36,15 @@ const Register = () => {
     if (passwordErrors) {
       errors.push(passwordErrors);
     }
+    const confirmPasswordErrors =
+      ValidationServiceHelpers.required(confirmPassword);
+    if (confirmPasswordErrors) {
+      errors.push(confirmPasswordErrors);
+    }
+
+    if (password !== confirmPassword) {
+      errors.push("Passwords do not match");
+    }
 
     return errors;
   };
