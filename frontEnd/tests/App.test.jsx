@@ -11,7 +11,9 @@ describe("App Tests", () => {
     );
 
     expect(screen.getByAltText("BestRestaurant logo")).toBeInTheDocument();
-    expect(screen.getByText("Tell me about...")).toBeInTheDocument();
-    expect(screen.getByText("© 2024 BestRestaurant")).toBeInTheDocument();
+    expect(
+      screen.getByText("Welcome to The Gourmet Bistro")
+    ).toBeInTheDocument();
+    expect(screen.getByText("© 2024 The Gourmet Bistro")).toBeInTheDocument();
   });
 });

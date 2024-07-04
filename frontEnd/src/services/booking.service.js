@@ -86,15 +86,3 @@ export const updateBooking = async (bookingId, date, time, numberOfPeople) => {
     );
   }
 };
-
-export const getUserById = async (userId) => {
-  try {
-    const response = await axios.get(`${API_URL}/user/${userId}`);
-    return response.data;
-  } catch (error) {
-    throw new Error(
-      error.response?.data?.message ||
-        "An error occurred while fetching the user details"
-    );
-  }
-};

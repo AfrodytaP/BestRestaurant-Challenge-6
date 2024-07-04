@@ -13,32 +13,33 @@ const BookingsTable = () => {
   const [filterDate, setFilterDate] = useState("");
   const [userRole, setUserRole] = useState(null);
   const currentUser = authService.getCurrentUser();
+  const [filteredDate, setFilteredDate] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        setUserRole(currentUser.role);
-        if (currentUser.role === "manager") {
-          const data = await getAllBookings(filterDate);
-          const bookingsWithUserEmails = await Promise.all(
-            data.map(async (booking) => {
-              const user = await authService.getUserById(booking.userId);
-              return { ...booking, email: user.email };
-            })
-          );
-          setBookings(bookingsWithUserEmails);
-        } else {
-          const data = await getBookingsByUserId(currentUser.id);
-          setBookings(data);
-        }
-      } catch (error) {
-        setError(error.message);
+  const fetchBookings = async (dateFilter = "") => {
+    try {
+      setUserRole(currentUser.role);
+      if (currentUser.role === "manager") {
+        const data = await getAllBookings(dateFilter);
+        const bookingsWithUserEmails = await Promise.all(
+          data.map(async (booking) => {
+            const user = await authService.getUserById(booking.userId);
+            return { ...booking, email: user.email };
+          })
+        );
+        setBookings(bookingsWithUserEmails);
+      } else {
+        const data = await getBookingsByUserId(currentUser.id);
+        setBookings(data);
       }
-    };
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
-    fetchBookings();
-  }, [filterDate]);
+  useEffect(() => {
+    fetchBookings(filteredDate);
+  }, [filteredDate]);
 
   const handleCancel = async (bookingId) => {
     try {
@@ -51,19 +52,17 @@ const BookingsTable = () => {
 
   const handleFilter = async () => {
     try {
-      if (userRole === "manager") {
-        const data = await getAllBookings(filterDate);
-        const bookingsWithUserEmails = await Promise.all(
-          data.map(async (booking) => {
-            const user = await getUserById(booking.userId);
-            return { ...booking, email: user.email };
-          })
-        );
-        setBookings(bookingsWithUserEmails);
-      } else {
-        const data = await getBookingsByUserId(currentUser.id);
-        setBookings(data);
-      }
+      setFilteredDate(filterDate);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleReset = async () => {
+    try {
+      setFilterDate("");
+      setFilteredDate("");
+      await fetchBookings("");
     } catch (error) {
       setError(error.message);
     }
@@ -88,8 +87,11 @@ const BookingsTable = () => {
               onChange={(e) => setFilterDate(e.target.value)}
             />
 
-            <button className="btn btn-primary" onClick={handleFilter}>
+            <button className="btn btn-primary me-2" onClick={handleFilter}>
               Filter
+            </button>
+            <button className="btn btn-secondary" onClick={handleReset}>
+              Reset
             </button>
           </div>
         </div>
