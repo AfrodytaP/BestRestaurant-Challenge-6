@@ -4,8 +4,7 @@ import authService from "../services/auth.service";
 import { useParams } from "react-router-dom";
 
 const BookingPage = () => {
-  const { getCurrentUser } = authService;
-  const currentUser = getCurrentUser();
+  const currentUser = authService.getCurrentUser();
   const { bookingId } = useParams();
 
   return (

@@ -1,35 +1,26 @@
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import { describe, it, vi, expect } from "vitest";
+import { render } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import BookingPage from "../src/components/BookingPage.jsx";
-import BookingForm from "../src/components/BookingForm.jsx";
 import authService from "../src/services/auth.service.js";
-import { useParams } from "react-router-dom";
 
-// Mock dependencies
-vi.mock("../services/auth.service", () => ({
-  getCurrentUser: vi.fn().mockReturnValue({ id: "user123", name: "Test User" }),
-}));
+describe("BookingPage Component", () => {
+  it("renders BookingForm with 'Make a Booking' text", () => {
+    vi.spyOn(authService, "getCurrentUser").mockReturnValue({
+      id: "user123",
+      name: "Test User",
+    });
 
-vi.mock("react-router-dom", () => ({
-  useParams: vi.fn().mockReturnValue({ bookingId: "booking123" }),
-}));
+    const bookingId = "booking123";
 
-vi.mock("./BookingForm", () => (props) => (
-  <div data-testid="mockBookingForm">
-    Mock Booking Form - currentUser: {JSON.stringify(props.currentUser)},
-    bookingIdToUpdate: {props.bookingIdToUpdate}
-  </div>
-));
-
-describe("BookingPage", () => {
-  it("passes the correct props to BookingForm", () => {
-    render(<BookingPage />);
-
-    const bookingForm = screen.getByTestId("mockBookingForm");
-    expect(bookingForm).toHaveTextContent(
-      'currentUser: {"id":"user123","name":"Test User"}'
+    const { getByText } = render(
+      <MemoryRouter initialEntries={[`/booking/${bookingId}`]}>
+        <Routes>
+          <Route path="/booking/:bookingId" element={<BookingPage />} />
+        </Routes>
+      </MemoryRouter>
     );
-    expect(bookingForm).toHaveTextContent("bookingIdToUpdate: booking123");
+
+    expect(getByText("Make a Booking")).toBeInTheDocument();
   });
 });

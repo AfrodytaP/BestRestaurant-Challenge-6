@@ -6,7 +6,6 @@ import {
   cancelBooking,
   getBookingById,
   updateBooking,
-  getUserById,
 } from "../../src/services/booking.service";
 import testBookings from "../testBookings.js";
 
